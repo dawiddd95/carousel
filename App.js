@@ -1,11 +1,21 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, {useState, useEffect} from 'react';
+import styled, {keyframes} from 'styled-components';
 
 const App = () => {
 
-    const Wrapper = styled.div``
+    const carousel = keyframes`
+     0% {
+		 transform: translateX(0);
+	}
+	 100% {
+		 transform: translateX(calc(-100%));
+	}
+`
 
-    const Track = styled.div``
+    const Track = styled.div`
+        animation: ${carousel} 20s linear infinite;
+    `
+
 
     // Zamiast tego poprostu jak mam importy tych trenerów to jako obiekt by poszły, albo tablica i tutaj by było
     // import trainers from '...'
@@ -24,23 +34,34 @@ const App = () => {
     ])
     const [counter, setCounter] = useState(0)
 
-    const handleOnClick = () => {        
-        const deletedItem = list.shift()
+    useEffect(() => {
+        console.log('useEffect')
 
-        setList([...list, deletedItem])
+        setInterval(() => {
+            console.log(setInterval)
+
+            const deletedItem = list.shift()
+
+            setList([...list, deletedItem])
+            
+            if(counter < list.length) setCounter(counter + 1)
+            else setCounter(0)
+        }, 1900)
+    }, [list])
+
+    const handleOnClick = () => {        
         
-        if(counter < list.length) setCounter(counter + 1)
-        else setCounter(0)
     }
 
+    // ogarnąć jeszcze jak zrobić by co jakiś czas samo się to robiło 
   return (
     <>
-        <Wrapper style={{width: 'auto', height: '350px', border: '2px solid red', display: 'flex', overflow: 'hidden'}}>
-            <Track style={{width: `${320*list.length}px`}}>
-                {list.map(element => <img key={element} src={element} style={{width: '300px', marginRight: '20px', height: '100%'}} /> )}
+        <div style={{width: '100vw', height: '350px', display: 'flex', overflow: 'hidden'}}>
+            <Track style={{minWidth: `${330*list.length}px`}}>
+                {list.map(element => <img key={element} src={element} style={{width: '300px', marginRight: '20px', height: '100%'}} alt='' /> )}
             </Track>
-        </Wrapper>
-        <button onClick={() => handleOnClick()}>Add new</button>
+        </div>
+        <button onClick={() => handleOnClick()}>Next ></button>
     </>
   );
 }
