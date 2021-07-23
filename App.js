@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
+import styled from 'styled-components';
 
 const App = () => {
+
+    const Wrapper = styled.div``
+
+    const Track = styled.div``
 
     // Zamiast tego poprostu jak mam importy tych trenerów to jako obiekt by poszły, albo tablica i tutaj by było
     // import trainers from '...'
@@ -19,8 +24,10 @@ const App = () => {
     ])
     const [counter, setCounter] = useState(0)
 
-    const handleOnClick = () => {
-        setList([...list, list[counter]])
+    const handleOnClick = () => {        
+        const deletedItem = list.shift()
+
+        setList([...list, deletedItem])
         
         if(counter < list.length) setCounter(counter + 1)
         else setCounter(0)
@@ -28,9 +35,11 @@ const App = () => {
 
   return (
     <>
-        <div style={{width: 'auto', height: '400px', border: '2px solid red', display: 'flex', overflow: 'hidden'}}>
-            {list.map(element => <img key={element} src={element} style={{width: '300px', marginRight: '20px', height: '350px'}} /> )}
-        </div>
+        <Wrapper style={{width: 'auto', height: '350px', border: '2px solid red', display: 'flex', overflow: 'hidden'}}>
+            <Track style={{width: `${320*list.length}px`}}>
+                {list.map(element => <img key={element} src={element} style={{width: '300px', marginRight: '20px', height: '100%'}} /> )}
+            </Track>
+        </Wrapper>
         <button onClick={() => handleOnClick()}>Add new</button>
     </>
   );
