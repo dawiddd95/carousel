@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 
 const App = () => {
@@ -34,23 +34,13 @@ const App = () => {
     ])
     const [counter, setCounter] = useState(0)
 
-    useEffect(() => {
-        console.log('useEffect')
-
-        setInterval(() => {
-            console.log(setInterval)
-
-            const deletedItem = list.shift()
-
-            setList([...list, deletedItem])
-            
-            if(counter < list.length) setCounter(counter + 1)
-            else setCounter(0)
-        }, 1900)
-    }, [list])
-
     const handleOnClick = () => {        
+        const deletedItem = list.shift()
+
+        setList([...list, deletedItem])
         
+        if(counter < list.length) setCounter(counter + 1)
+        else setCounter(0)
     }
 
     // ogarnąć jeszcze jak zrobić by co jakiś czas samo się to robiło 
