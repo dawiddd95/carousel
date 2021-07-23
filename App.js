@@ -44,6 +44,7 @@ const App = () => {
     }
 
     // ogarnąć jeszcze jak zrobić by co jakiś czas samo się to robiło 
+    // Może tak, że jeśli następny element po tym co zniknął jest na event.clientX czy jakoś tak
   return (
     <>
         <div style={{width: '100vw', height: '350px', display: 'flex', overflow: 'hidden'}}>
